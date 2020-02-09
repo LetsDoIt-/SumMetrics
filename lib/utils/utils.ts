@@ -4,13 +4,14 @@ import {IContext} from "../types/loggingTypes";
 import {Category} from "typescript-logging";
 
 const CONSTANTS = {
-    'SUFFIX'            :   'sum',
-    'ROUTE'             :   '/metric/:key',
-    'ROUTER'            :   'router',
-    'METRIC_CONTROLLER' :   'metric.controller',
-    'STORAGE'           :   'storage.model',
-    'UTIL'              :   'util',
-    'DELIMETER'         :   '$%^'
+    'SUFFIX'                :   'sum',
+    'POST_METRIC_ROUTE'     :   '/metric/:key',
+    'GET_METRIC_SUM_ROUTE'  :   '/metric/:key/sum',
+    'ROUTER'                :   'router',
+    'METRIC_CONTROLLER'     :   'metric.controller',
+    'STORAGE'               :   'storage.model',
+    'UTIL'                  :   'util',
+    'DELIMETER'             :   '$%^'
 };
 
 const logger = new Category(CONSTANTS.UTIL);

@@ -20,13 +20,13 @@ export class Routes {
      * @memberof Routes
      */
     public routes(app): void {          
-        app.route(CONSTANTS.ROUTE) 
+        app.route(CONSTANTS.POST_METRIC_ROUTE) 
         .post(async (req: Request, res: Response, next : NextFunction) =>{
             const context = {
                 uniqueRequestId : generateTempId({length : 10})
             };
             try {
-                logger.info(() => `Route ${CONSTANTS.ROUTE} Method : POST call with RequestId : ${context.uniqueRequestId} started`);
+                logger.info(() => `Route ${CONSTANTS.POST_METRIC_ROUTE} Method : POST call with RequestId : ${context.uniqueRequestId} started`);
                 
                 validateParameters({params : ['key'], input : req.params, context});
                 validateParameters({params : ['value'], input : req.body, context});
@@ -37,7 +37,7 @@ export class Routes {
                 logger.info(() => `Params Key : ${key} Value : ${value} and with RequestId : ${context.uniqueRequestId}`);
                 
                 const result = await this.metricController.markEventByKey({key,value,context});
-                logger.info(() => `Route ${CONSTANTS.ROUTE} Method : POST call with RequestId : ${context.uniqueRequestId} ended with result : ${util.inspect(result)}`);
+                logger.info(() => `Route ${CONSTANTS.POST_METRIC_ROUTE} Method : POST call with RequestId : ${context.uniqueRequestId} ended with result : ${util.inspect(result)}`);
                 res.status(201);
                 res.json(result);
             } catch(err) {
@@ -45,12 +45,14 @@ export class Routes {
                 next(err);
             }
         })
+
+        app.route(CONSTANTS.GET_METRIC_SUM_ROUTE) 
         .get(async (req: Request, res: Response, next : NextFunction) => {
             const context = {
                 uniqueRequestId : generateTempId({length : 10})
             };
             try{
-                logger.info(() => `Route ${CONSTANTS.ROUTE} Method : GET call with RequestId : ${context.uniqueRequestId} started`);
+                logger.info(() => `Route ${CONSTANTS.GET_METRIC_SUM_ROUTE} Method : GET call with RequestId : ${context.uniqueRequestId} started`);
                 
                 validateParameters({params : ['key'], input : req.params, context});
                 logger.info(() => `Parameter validation for RequestId passed ${context.uniqueRequestId}`);
@@ -59,7 +61,7 @@ export class Routes {
                 logger.info(() => `Params Key : ${key} and with RequestId : ${context.uniqueRequestId}`);
                 
                 const result = await this.metricController.getSumByKey({key, context});
-                logger.info(() => `Route ${CONSTANTS.ROUTE} Method : GET call with RequestId : ${context.uniqueRequestId} ended with result : ${util.inspect(result)}`);
+                logger.info(() => `Route ${CONSTANTS.GET_METRIC_SUM_ROUTE} Method : GET call with RequestId : ${context.uniqueRequestId} ended with result : ${util.inspect(result)}`);
                 
                 res.json(result)
             } catch(err){
