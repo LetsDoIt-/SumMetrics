@@ -38,7 +38,7 @@ export class Routes {
                 
                 const result = await this.metricController.markEventByKey({key,value,context});
                 logger.info(() => `Route ${CONSTANTS.ROUTE} Method : POST call with RequestId : ${context.uniqueRequestId} ended with result : ${util.inspect(result)}`);
-                
+                res.status(201);
                 res.json(result);
             } catch(err) {
                 logger.error(`RequestId : ${context.uniqueRequestId} failed with error ${err.status}, ${err.message}`,err);
