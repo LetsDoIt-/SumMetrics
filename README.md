@@ -24,7 +24,7 @@ GET /metric/:key/sum
 Response (200):
 ```
 {
-"value": 400
+    "value": 400
 }
 ```
 
@@ -35,3 +35,18 @@ Response (200):
 | 400 | `BAD REQUEST` |
 | 404 | `NOT FOUND` |
 | 500 | `INTERNAL SERVER ERROR` |
+
+
+To run the solution :
+```
+//installation
+nvm install 13.6.0
+npm install
+npm install -g typescript ts-node
+
+// Run in Dev mode
+npm run dev
+
+// Run all test 
+npm test
+```
